@@ -2,9 +2,9 @@ import Image from 'next/image';
 import React from 'react';
 
 
-export default function navbar() {
+export default function Navbar({ className = "" }: { className?: string }) {
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className={`navbar bg-base-100 shadow-sm ${className}`}>
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">daisyUI</a>
       </div>
