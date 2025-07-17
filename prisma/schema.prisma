@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+=======
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+>>>>>>> 69e21060e5c278c3c26577a4a8794e33e2c66ca9
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -9,6 +18,7 @@ datasource db {
 }
 
 model Product {
+<<<<<<< HEAD
   id          String     @id @default(uuid()) @map("_id") @db.Uuid
   description String
   imageUrl    String
@@ -92,4 +102,13 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verificationtokens")
+=======
+  id         String   @id @default(cuid())
+  name        String
+  description String?
+  price       Float
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+>>>>>>> 69e21060e5c278c3c26577a4a8794e33e2c66ca9
 }
