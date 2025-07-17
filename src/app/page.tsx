@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductCard from '@/components/card/page';
+import "./globals.css";
 import prisma from '@/lib/prisma';
 
 export default async function home() {
