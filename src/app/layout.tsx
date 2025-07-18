@@ -36,7 +36,7 @@ export default function RootLayout({
        
        <SessionProvider> 
         <Navbar />
-        <main className="p-5 max-w-3xl m-auto"
+        <main className="container m-auto"
         {children}
         </main>
         </SessionProvider>
