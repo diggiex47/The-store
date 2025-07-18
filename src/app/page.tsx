@@ -17,6 +17,7 @@ export default async function home() {
               WELCOME TO THE STORE
             </h1>
           </div>
+
         </div>
         
       </div>
