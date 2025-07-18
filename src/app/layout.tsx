@@ -31,11 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+
        {/* wrapeed in the sessionprovider so the user session remains throughout all the compoenet of the site and it works smoothly  */}
        
        <SessionProvider> 
         <Navbar />
-        <main className="p-5 max-w-3xl m-auto">
+        <main className="p-5 max-w-3xl m-auto"
         {children}
         </main>
         </SessionProvider>
