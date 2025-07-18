@@ -7,6 +7,7 @@ import Image from 'next/image';
 
 interface ProductCardProps {
   product: Product;
+  className?: string;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
@@ -14,20 +15,20 @@ export default function ProductCard({ product }: ProductCardProps) {
   const isNew =  Date.now() - new Date(product.createdAt).getTime() < 1000 * 60 * 60 *24 * 7;
 
   return (
-    <>
-    <Link href={`/product/${product.id}`} className="card w-auto m-auto bg-blue-200 text-black hover:shadow-x2 transition-opacity">
-      <figure>
+    <div className="p-2 ">
+    <Link href={`/product/${product.id}`} className="card bg-green-100 shadow-xl text-black hover:shadow-x1 hover:shadow-cyan-300">
+      <figure className=" h-64 w-full overflow-hidden">
         {product.imageUrl ? (
           <Image
             src={product.imageUrl}
             alt={product.name}
             width={400}
-            height={300}
+            height={400}
             className='h-auto object-cover'
           />) : null}
       </figure>
 
-      <div className= 'card-body'>
+      <div className= 'card-body p-4'>
         <h2 className="card-title">
           {product.name}
           </h2>
@@ -39,6 +40,6 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
       
     </Link>
-    </>
+    </div>
   )
 }
