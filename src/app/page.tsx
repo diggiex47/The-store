@@ -3,6 +3,7 @@
 import HomePageClient from "./HomePageClient";
 import ProductList from "@/components/getProduct/page";
 
+
 export default async function Home() {
   // 1. Fetch data on the server
 

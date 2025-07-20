@@ -1,83 +1,114 @@
 // src/app/HomePageClient.tsx
 "use client";
 
-
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-// This component will receive the server-rendered products as a prop
 export default function HomePageClient() {
-  // A ref to the element that will contain the entire scrollable scene
   const targetRef = useRef<HTMLDivElement | null>(null);
-
-  // useScroll will track the scroll progress within targetRef
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    // Start tracking when the top of the container hits the top of the viewport
-    // End tracking when the bottom of the container hits the bottom of the viewport
     offset: ["start start", "end end"],
   });
 
-  // --- Define Animations based on Scroll Progress ---
+  // --- ANIMATION TIMELINE ---
 
-  // Animate the hero image's opacity. It will fade out as we scroll down.
-  // It starts at 1 (fully visible) and ends at 0 (fully transparent)
-  // The [0, 0.5] part means this animation happens during the first 50% of the scroll.
-  const heroImageOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  
-  // Animate the hero image's scale. It will shrink slightly for a nice effect.
-  const heroImageScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  // 1. Overlay Opacity
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
 
-  // Animate the hero text's opacity. It will fade in and then out.
-  // It's invisible at the start, fully visible at 20% scroll, and gone by 50%.
-  const heroTextOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5], [0, 1, 0]);
-  
-  // Animate the hero text's y-position. It will move up slightly as it fades.
-  const heroTextY = useTransform(scrollYProgress, [0, 0.5], ["0%", "-100%"]);
+  // 2. Text Opacity
+  const heroTextOpacity = useTransform(
+    scrollYProgress,
+    [0.15, 0.25, 0.5, 0.7],
+    [0, 1, 1, 0]
+  );
 
-  // Animate the product section's opacity. It fades in as the hero fades out.
-  const productsOpacity = useTransform(scrollYProgress, [0.5, 0.8], [0, 1]);
+  // 3. Background Blur
+  const backgroundBlur = useTransform(
+    scrollYProgress,
+    [0.5, 0.7],
+    ["blur(0px)", "blur(8px)"]
+  );
+
+  // 4. Hero Section's Final Fade-Out
+  const heroSectionOpacity = useTransform(
+    scrollYProgress,
+    [0.7, 0.8],
+    [1, 0]
+  );
+
+  // 5. Hero Section's Upward Movement
+  const heroSectionY = useTransform(
+    scrollYProgress,
+    [0.5, 0.8],
+    ["0%", "-100%"]
+  );
+
+  // 6. Hero Image Scale // <-- NEW
+  // Starts shrinking at 50% scroll (when the fade/blur begins),
+  // down to 80% of its size by the time it has faded out at 80% scroll.
+  const heroImageScale = useTransform(scrollYProgress, [0.5, 0.8], [1, 0.8]);
+
+  // 7. Products Section Opacity
+  const productsOpacity = useTransform(
+    scrollYProgress,
+    [0.65, 0.8],
+    [0, 1]
+  );
 
   return (
-    // This container needs a defined height for the scroll animations to work.
-    // 300vh means the scrollable area is 3 times the viewport height.
-    <div ref={targetRef} className="relative h-[300vh]">
-      {/* This is the sticky container that holds our animated elements */}
+    <div ref={targetRef} className="relative h-[400vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         
-        {/* Animated Hero Image */}
+        {/* --- HERO CONTAINER --- */}
         <motion.div
-          style={{ opacity: heroImageOpacity, scale: heroImageScale }}
+          style={{
+            opacity: heroSectionOpacity,
+            y: heroSectionY,
+          }}
           className="absolute inset-0"
         >
-          <div
+          {/* Hero Image (base layer) - NOW a motion.div to handle its own scale */}
+          <motion.div
             className="h-full w-full bg-cover bg-center"
             style={{
               backgroundImage:
                 "url(https://images.unsplash.com/photo-1575663620136-5ebbfcc2c597?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+              scale: heroImageScale, // <-- NEW
             }}
           />
-          {/* A dark overlay to make text more readable */}
-          <div className="absolute inset-0 bg-black/50" />
+
+          {/* Animated Overlay with Blur */}
+          <motion.div
+            style={{
+              opacity: overlayOpacity,
+              backdropFilter: backgroundBlur,
+            }}
+            className="absolute inset-0 bg-black/50"
+          />
+
+          {/* Animated Hero Text */}
+          <motion.div
+            style={{ opacity: heroTextOpacity }}
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <h1 className="text-5xl font-bold text-green-300 text-center">
+              WELCOME TO THE STORE
+            </h1>
+          </motion.div>
         </motion.div>
 
-        {/* Animated Hero Text */}
-        <motion.div
-          style={{ opacity: heroTextOpacity, y: heroTextY }}
-          className="absolute inset-0 flex items-center justify-center text-neutral-content"
-        >
-          <h1 className="text-5xl font-bold text-green-300 text-center">
-            WELCOME TO THE STORE
-          </h1>
-        </motion.div>
-
-        {/* Animated Products Section */}
+        {/* --- PRODUCTS CONTAINER --- */}
         <motion.div
           style={{ opacity: productsOpacity }}
           className="absolute inset-0 flex items-center justify-center"
         >
-          {/* We pass the pre-rendered products from the server component here */}
-          <div className="mx-auto p-4"></div>
+          {/* Replace this with your actual product grid component */}
+          <div className="mx-auto grid max-w-4xl grid-cols-3 gap-8 p-4">
+            <div className="h-48 w-full rounded-lg bg-neutral-700"></div>
+            <div className="h-48 w-full rounded-lg bg-neutral-700"></div>
+            <div className="h-48 w-full rounded-lg bg-neutral-700"></div>
+          </div>
         </motion.div>
 
       </div>

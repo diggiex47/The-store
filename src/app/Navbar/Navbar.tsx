@@ -13,7 +13,7 @@ async function searchProducts(formData: FormData){
 
 export default function Navbar() {
   return (
-    <div className="bg-base-100">
+    <div className="bg-base-100 fixed top-0 left-0 right-0 z-50 backdrop-blur-sm">
       <div className="navbar max-w-7xl m-auto flex-col  sm:flex-row ">
         <div className="flex-1">
             {/* using normal case to make it as you write otherwise it make everything in caps 

@@ -36,7 +36,7 @@ export default function RootLayout({
        
        <SessionProvider> 
         <Navbar />
-        <main className="container m-auto min-w-[300px] max-w-7xl">
+        <main className="pt-18 m-auto min-w-[300px] max-w-7xl theme:light">
         {children}
         </main>
         </SessionProvider>
