@@ -29,14 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" >
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 
        {/* wrapeed in the sessionprovider so the user session remains throughout all the compoenet of the site and it works smoothly  */}
        
        <SessionProvider> 
         <Navbar />
-        <main className="container m-auto"
+        <main className="container m-auto min-w-[300px] max-w-7xl">
         {children}
         </main>
         </SessionProvider>
