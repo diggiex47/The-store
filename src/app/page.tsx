@@ -3,15 +3,14 @@
 import HomePageClient from "./HomePageClient";
 import ProductList from "@/components/getProduct/page";
 
-
 export default async function Home() {
-  // 1. Fetch data on the server
-
-  // 2. Pass the rendered server component (or its data) to the client component
+  // The layout provides the <main> tag now.
+  // This component should only return its specific content.
+  // We use a React Fragment (<>) to return multiple components.
   return (
-    <main>
+    <>
       <HomePageClient/>
-      <ProductList/>
-    </main>
+        <ProductList />
+    </>
   );
 }
