@@ -2,7 +2,8 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  output = "../src/generated/prisma"
+ 
 }
 
 datasource db {
@@ -11,7 +12,7 @@ datasource db {
 }
 
 model Product {
-  id          String     @id @default(uuid())
+  id          String     @id @default(uuid()) @db.Uuid
   description String
   imageUrl    String
   name        String
@@ -22,7 +23,7 @@ model Product {
 }
 
 model Cart {
-  id        String     @id @default(uuid())
+  id        String     @id @default(uuid()) @db.Uuid
   userId    String?    @unique @db.Uuid // <-- CHANGE: Added @unique to enforce one-cart-per-user
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -68,7 +69,7 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String    @id @default(uuid()) @db.Uuid
   name          String?
   email         String?   @unique
   emailVerified DateTime?
