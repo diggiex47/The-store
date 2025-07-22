@@ -4,6 +4,8 @@ import Image from "next/image";
 import PriceTag from "@/components/priceTag/page";
 import { cache } from "react";
 import { Metadata } from "next";
+import AddToCartButton from "./AddToCartButton";
+import { IncProductCount } from "./action";
 
 interface ProductPageProps {
     params: {id : string};
@@ -49,6 +51,9 @@ export default async function ProductPage(
                 <h1 className="text-2xl font-bold mt-4">{product.name}</h1>
                 <PriceTag  price={product.price} className="mt-2"/>
                 <p className="my-6">{product.description}</p>
+                <AddToCartButton productId={product.id}
+                IncProductCount = {IncProductCount}
+                />
             </div>
         </div>
     )

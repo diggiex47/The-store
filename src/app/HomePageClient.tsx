@@ -47,7 +47,7 @@ export default function HomePageClient() {
 
   return (
     // Reduce the total height to make the animation sequence tighter.
-    <div ref={targetRef} className="relative h-[265vh]">
+    <div ref={targetRef} className="relative h-[300vh]">
       {" "}
       {/* CHANGED */}
       <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden">
@@ -57,7 +57,7 @@ export default function HomePageClient() {
             opacity: heroSectionOpacity,
             y: heroSectionY,
           }}
-          className="absolute inset-1"
+          className="absolute inset-0"
         >
           <motion.div
             className="h-full w-full bg-cover bg-center"
