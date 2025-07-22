@@ -41,6 +41,7 @@ model cartItem {
 model Account {
   id                String  @id @default(uuid())
   userId            String  @db.Uuid
+  type              String
   provider          String
   providerAccountId String
   refresh_token     String? @db.Text // <-- IMPROVEMENT: For very long tokens
