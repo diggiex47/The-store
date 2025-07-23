@@ -26,14 +26,14 @@ export default function ThemeToggle() {
 
   // The only change is the returned JSX.
   return (
-    <div className="p-2 flex-none">
-      <label className="flex cursor-pointer items-center gap-1">
+    <div className=" flex">
+      <label className="flex cursor-pointer items-center gap">
         {/* Sun Icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
           height="20"
-          viewBox="0 0 24 24"
+          viewBox="0 0 28 28"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -58,7 +58,7 @@ export default function ThemeToggle() {
           xmlns="http://www.w3.org/2000/svg"
           width="20"
           height="20"
-          viewBox="0 0 24 24"
+          viewBox="0 0 28 28"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"

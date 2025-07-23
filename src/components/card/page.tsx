@@ -15,12 +15,10 @@ export default function ProductCard({ product }: ProductCardProps) {
     1000 * 60 * 60 * 24 * 7;
 
   return (
-    <div>
-      <Link
-        href={"/Product/" + product.id}
-        className="card hover:shadow-x1 bg-green-100 text-black shadow-xl hover:shadow-cyan-300"
-      >
-        <figure className="h-64 w-full overflow-hidden">
+    <div className="m-1">
+    <div className="card  p-2 rounded-b-sm bg-green-100 text-black hover:drop-shadow-lg hover:shadow-cyan-300">
+      <Link href={"/Product/" + product.id}>
+        <figure className="h-64 w-full overflow-hidden rounded-t-sm">
           {product.imageUrl ? (
             <Image
               src={product.imageUrl}
@@ -32,14 +30,18 @@ export default function ProductCard({ product }: ProductCardProps) {
           ) : null}
         </figure>
 
-        <div className="card-body p-4">
-          <h2 className="card-title">{product.name}</h2>
-          {isNew && <div className="badge badge-secondary">New</div>}
+        <div className="card-body p-2">
+          <div className="flex items-center justify-between">
+            <h2 className="card-title">{product.name}</h2>
+            {isNew && <div className="badge badge-secondary">New</div>}{" "}
+          </div>
           <p>{product.description}</p>
-          <PriceTag price={product.price} />
-          <button className="btn btn-primary mt-2">Buy now</button>
+          <div className="text-sm">
+            <PriceTag price={product.price} />
+          </div>
         </div>
       </Link>
+    </div>
     </div>
   );
 }
