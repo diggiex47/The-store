@@ -8,6 +8,11 @@ export type cartWithProducts = Prisma.CartGetPayload<{
   };
 }>;
 
+export type cartItemWithProduct = Prisma.cartItemGetPayload<{
+  include: { product: true };
+}>;
+
+
 export type shoppingCart = cartWithProducts & {
   size: number;
   subtotal: number;
