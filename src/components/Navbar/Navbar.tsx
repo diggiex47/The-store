@@ -31,7 +31,7 @@ export default async function Navbar() {
         
 
         </div>
-        <ShoppingCartBtn className="ml-1" cart={cart} />
+        <ShoppingCartBtn cart={cart} />
         <ThemeToggle />
       </div>
       

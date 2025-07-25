@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SessionProvider from "./SessionProvider";
 import Navbar from "../components/Navbar/Navbar";
+import Footer from "@/components/footer/page";
 
 
 
@@ -38,6 +39,7 @@ export default function RootLayout({
         <main className="m-auto min-w-[300px] max-w-7xl p-4 pt-16">
           {children}
         </main>
+        <Footer/>
         </SessionProvider>
       </body>
     </html>
