@@ -63,6 +63,7 @@ model Session {
 model User {
   id            String    @id @default(uuid()) @db.Uuid
   name          String?
+  password     String?   // <-- IMPROVEMENT: Added password field for local authentication
   email         String?   @unique
   emailVerified DateTime?
   image         String?

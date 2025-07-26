@@ -4,7 +4,7 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle"; // <-- IMPORT
 import { searchProducts } from "@/components/SearchProduct/page"; // Import the search function
 import UserMenuBtn from "./UserMenuBtn";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../api/auth/[...nextauth]/option";
 import { getServerSession } from "next-auth";
 
 export default async function Navbar() {
@@ -30,7 +30,7 @@ export default async function Navbar() {
           {/* PLACE THE TOGGLE HERE */}
         </div>
         <ThemeToggle />
-        <UserMenuBtn session={session} />
+        <UserMenuBtn />
       </div>
     </div>
   );

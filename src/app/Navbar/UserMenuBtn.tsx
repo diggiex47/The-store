@@ -6,12 +6,15 @@
 import { Session } from "next-auth";
 import Image from "next/image";
 import profilePic from "@/assest/grandmother.png";
-import { signIn, signOut } from "next-auth/react";
-interface UserMenuBtnProps {
-  session: Session | null;
-}
+import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+// interface UserMenuBtnProps {
+//   session: Session | null;
+// }
 
-export default function UserMenuBtn({ session }: UserMenuBtnProps) {
+export default function UserMenuBtn() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
   const user = session?.user;
   return (
     <div className="dropdown dropdown-end">
@@ -51,7 +54,11 @@ export default function UserMenuBtn({ session }: UserMenuBtnProps) {
               SignOut
             </button>
           ) : (
-            <button onClick={() => signIn()}>SignIn</button>
+            <button
+              onClick={() => router.push("/signIn")}
+            >
+              SignIn
+            </button>
           )}
         </li>
       </ul>
