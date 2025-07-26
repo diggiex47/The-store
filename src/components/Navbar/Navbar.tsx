@@ -3,8 +3,10 @@
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle"; // <-- IMPORT
 import { searchProducts } from "@/components/SearchProduct/page"; // Import the search function
+import UserMenuBtn from "./UserMenuBtn";
+
+import { getServerSession } from "next-auth";
 import { getCart } from "@/lib/cart";
-import ShoppingCartBtn from "./ShoppingCartBtn";
 
 export default async function Navbar() {
   const cart = await getCart();
@@ -31,8 +33,9 @@ export default async function Navbar() {
         
 
         </div>
-        <ShoppingCartBtn cart={cart} />
+        {/* <ShoppingCartBtn cart={cart} /> */}
         <ThemeToggle />
+        <UserMenuBtn />
       </div>
       
     </div>
