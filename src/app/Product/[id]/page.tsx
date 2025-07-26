@@ -24,7 +24,7 @@ const getProduct = cache(async (id: string) => {
 export async function generateMetadata(
   { params }: { params: { id: string } }
 ): Promise<Metadata> {
-  const product = await getProduct(params.id);
+  const product = (await getProduct(params.id));
 
   return {
     title: product.name + " | The Store",
