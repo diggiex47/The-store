@@ -7,20 +7,24 @@ import { Metadata } from "next";
 import AddToCartButton from "./AddToCartButton";
 import { IncProductCount } from "./action";
 
-interface ProductPageProps {
-    params: {id : string};
-}
+// ✅ Correctly typed props for App Router
+type ProductPageProps = {
+  params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
+// ✅ Cacheable product fetcher
 const getProduct = cache(async (id: string) => {
-    const product = await prisma.product.findUnique({where: {id}})
-    if(!product) notFound();
-    return product;
-})
+  const product = await prisma.product.findUnique({ where: { id } });
+  if (!product) notFound();
+  return product;
+});
 
+// ✅ Correctly typed metadata function for dynamic route
 export async function generateMetadata(
   { params }: { params: { id: string } }
 ): Promise<Metadata> {
-  const product = await getProduct(params.id);
+  const product = (await getProduct(params.id));
 
   return {
     title: product.name + " | The Store",
@@ -31,34 +35,31 @@ export async function generateMetadata(
   };
 }
 
+// ✅ Final working component
+export default async function ProductPage({ params: { id } }: ProductPageProps) {
+  const product = await prisma.product.findUnique({ where: { id } });
+  if (!product) notFound();
 
-export default async function ProductPage(
-    {params: {id}} : ProductPageProps
-){
-    const product = await prisma.product.findUnique({where: {id}})
-    if(!product) notFound();
+  return (
+    <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
+      <Image
+        src={product.imageUrl}
+        alt={product.name}
+        width={300}
+        height={300}
+        className="rounded-lg shadow-lg"
+        priority
+      />
 
-
-    return (
-        <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
-            <Image 
-            src={product.imageUrl}
-            alt={product.name}
-            width={300}
-            height={300}
-            className="rounded-lg shadow-lg"
-            priority
-            />
-
-            <div>
-                <h1 className="text-2xl font-bold mt-4">{product.name}</h1>
-                <PriceTag  price={product.price} className="mt-2"/>
-                <p className="my-6">{product.description}</p>
-                <AddToCartButton
-                    productId={product.id}
-                    IncProductCount={IncProductCount}
-                />
-            </div>
-        </div>
-    )
+      <div>
+        <h1 className="text-2xl font-bold mt-4">{product.name}</h1>
+        <PriceTag price={product.price} className="mt-2" />
+        <p className="my-6">{product.description}</p>
+        <AddToCartButton
+          productId={product.id}
+          IncProductCount={IncProductCount}
+        />
+      </div>
+    </div>
+  );
 }
