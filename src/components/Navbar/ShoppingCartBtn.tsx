@@ -36,6 +36,7 @@ function closeDropdown() {
             />
           </svg>
           <span className="badge badge-sm indicator-item">{cart?.size || 0}</span>
+          
         </div>
       </label>
       <div

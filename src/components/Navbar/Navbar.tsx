@@ -5,10 +5,10 @@ import ThemeToggle from "./ThemeToggle"; // <-- IMPORT
 import { searchProducts } from "@/components/SearchProduct/page"; // Import the search function
 import UserMenuBtn from "./UserMenuBtn";
 
-import { getServerSession } from "next-auth";
 import { getCart } from "@/lib/cart";
 
 export default async function Navbar() {
+  
   const cart = await getCart();
   return (
     <div className="bg-base-100 fixed top-0 right-0 left-0 z-50 h-16 backdrop-blur-sm">

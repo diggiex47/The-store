@@ -62,7 +62,7 @@ model Session {
 }
 model User {
   id            String    @id @default(uuid()) @db.Uuid
-  name          String?
+  name          String?   @unique
   password     String?   // <-- IMPROVEMENT: Added password field for local authentication
   email         String?   @unique
   emailVerified DateTime?
@@ -81,3 +81,19 @@ model VerificationToken {
   expires    DateTime
   @@unique([identifier, token])
 }
+
+
+model VerificationOTP{
+
+  id         String @id @default(uuid())
+  email      String
+  otp        String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+
+} 
+
+
+
+
+
