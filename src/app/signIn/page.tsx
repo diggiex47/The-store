@@ -14,12 +14,11 @@ export default function SignInPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     // Save to cookie before sign-in
     document.cookie = `rememberMe=${rememberMe};  path=/`;
-
-    const [loading, setLoading] = useState(false);
 
     try {
       setLoading(true);
@@ -48,7 +47,7 @@ export default function SignInPage() {
       {/* Card Box */}
       <div className="w-full max-w-md space-y-6 rounded-md bg-white p-8 shadow-md">
         {/* Heading */}
-        <h2 className="text-center pr-6 item-centre text-4xl font-bold text-gray-900">
+        <h2 className="item-centre pr-6 text-center text-4xl font-bold text-gray-900">
           Sign In
         </h2>
 

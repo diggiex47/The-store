@@ -15,11 +15,7 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<RegisterSchemaType>({
+  const { register,handleSubmit,formState: { errors }} = useForm<RegisterSchemaType>({
     resolver: zodResolver(registerSchema),
   });
 
@@ -37,7 +33,7 @@ export default function SignUp() {
         router.push(`/signUp/verify?email=${data.email}`);
       } else {
         const errorData = await res.json();
-        seterrorinServer(errorData.message || "Registration failed");
+        seterrorinServer(errorData.error || "Registration failed");
       }
     } catch (err) {
       seterrorinServer("Something went wrong");

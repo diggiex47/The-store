@@ -52,48 +52,34 @@ model Account {
   id_token          String? @db.Text // <-- IMPROVEMENT: For very long tokens
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([provider, providerAccountId])
 }
+
 model Session {
   sessionToken String   @unique
   userId       String   @db.Uuid
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 model User {
-  id            String    @id @default(uuid()) @db.Uuid
-  name          String?   @unique
-  password     String?   // <-- IMPROVEMENT: Added password field for local authentication
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  Cart          Cart?     // <-- CHANGE: Changed from Cart[] to Cart? for a one-to-one relation
-  accounts      Account[]
-  sessions      Session[]
+  id                 String              @id @default(uuid()) @db.Uuid
+  name               String?             @unique
+  password           String? 
+  email              String?             @unique
+  emailVerified      DateTime?
+  image              String?
+  Cart               Cart? 
+  accounts           Account[]
+  sessions           Session[]
+  VerifyOTPs        VerifyOTP[]
 }
 
-model VerificationToken {
-  // This model is fine, but for consistency, cuid() is often used here
-  // as it doesn't need to be a UUID. This is an optional style choice.
-  id         String   @id @default(cuid()) // <-- IMPROVEMENT: Using cuid() is common here.
-  identifier String
-  token      String   @unique
-  expires    DateTime
-  @@unique([identifier, token])
+model VerifyOTP {
+  id      String   @id @default(uuid()) @db.Uuid
+  otp    String
+  expires DateTime
+  userId  String  @db.Uuid 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
-
-model VerificationOTP{
-
-  id         String @id @default(uuid())
-  email      String
-  otp        String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-
-} 
-
-
-
-
-
