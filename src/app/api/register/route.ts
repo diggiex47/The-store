@@ -29,8 +29,6 @@ export async function POST(req: Request) {
       );
     }
 
-
-
     //Cecking for Email
     const existingemail = await prisma.user.findUnique({
       where: {
@@ -54,9 +52,9 @@ export async function POST(req: Request) {
     });
 
     //if user is present already
-    if (existingUser) {
+    if (existingUser && existingUser.email !== email) {
       return NextResponse.json(
-        { error: "username already in use" },
+        { error: "Username already exists" },
         { status: 409 },
       );
     }
@@ -70,7 +68,7 @@ export async function POST(req: Request) {
     await prisma.$transaction(async (tx) => {
       let user;
 
-      //if User is Existing we update his deatils and he is not verified then we update his details 
+      //if User is Existing we update his deatils and he is not verified then we update his details
       if (existingUser) {
         user = await tx.user.update({
           where: { email },
@@ -87,8 +85,7 @@ export async function POST(req: Request) {
       await tx.verifyOTP.deleteMany({ where: { userId: user.id } });
       const expires = new Date(Date.now() + 5 * 60 * 1000);
 
-
-      //creating the opt 
+      //creating the opt
       await tx.verifyOTP.create({
         data: {
           userId: user.id,
@@ -113,6 +110,5 @@ export async function POST(req: Request) {
       { error: "Internal server error" },
       { status: 500 },
     );
-    
   }
 }

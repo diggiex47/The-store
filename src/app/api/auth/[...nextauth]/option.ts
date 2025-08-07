@@ -5,6 +5,7 @@ import { env } from "@/lib/env";
 import prisma from "@/lib/prisma";
 import { NextAuthOptions, Session } from "next-auth";
 
+
 import { cookies } from "next/headers";
 
 export const authOptions: NextAuthOptions = {
@@ -42,6 +43,15 @@ export const authOptions: NextAuthOptions = {
           if (!user) {
             console.log("No user found with the provided credentials");
             return null;
+          }
+
+          if(!user.emailVerified){
+            
+            const isEmail = credentials.username.includes('@');
+            if(!isEmail){
+              throw new Error("Please use your email until you are verified");
+            }
+          throw new Error("Not Verified");
           }
           if (
             !credentials?.username ||

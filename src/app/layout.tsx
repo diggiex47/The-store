@@ -32,11 +32,11 @@ export default function RootLayout({
   return (
     // Set a default theme here
     <html lang="en" data-theme="light"> 
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className=  {`${geistSans.variable} ${geistMono.variable} antialiased flex min-h-screen  flex-col`}>
        <SessionProvider> 
          
         <Navbar />
-        <main className="m-auto min-w-[300px] max-w-7xl p-4 pt-16">
+        <main className="flex-grow m-auto min-w-[300px] max-w-7xl p-4 pt-16">
           {children}
         </main>
         <Footer/>
