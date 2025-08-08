@@ -1,16 +1,19 @@
 // src/app/page.tsx
-import ProductWrapper from "@/components/wrapper/page";
-import HomePageClient from "./HomePageClient";
-import ProductList from "@/components/getProduct/page";
-
+import { getServerSession } from "next-auth";
+import authOptions from "./api/auth/[...nextauth]/option";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import PublicPage from "./publicPage/page";
 
 export default async function Home() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/dashboard");
+  }
   return (
-    <>
-      <HomePageClient />
-      <ProductWrapper>
-        <ProductList />
-      </ProductWrapper>
-    </>
+   <div>
+    <PublicPage></PublicPage>
+   </div>
   );
 }

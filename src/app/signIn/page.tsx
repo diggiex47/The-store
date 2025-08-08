@@ -4,9 +4,8 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { POST } from "../api/register/route";
-import Email from "next-auth/providers/email";
-import { stat } from "fs";
+import PixelButton from "@/components/pixelButton/page";
+import { error } from "console";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -29,25 +28,6 @@ export default function SignInPage() {
     document.cookie = `rememberMe=${rememberMe};  path=/`;
 
     try {
-      const status = await fetch("/api/auth/check_status", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: username }),
-      });
-
-      const data = await status.json();
-
-      if (data.status === "unverified") {
-        router.push(`/signUp/verify?email=${data.email}`);
-        return;
-      }
-
-      if (data.status === "not_found") {
-        // If the user doesn't exist, show an error.
-        setErrorMsg("Invalid username or password.");
-        setLoading(false);
-        return; // Stop the function here.
-      }
       const result = await signIn("credentials", {
         username,
         password,
@@ -56,8 +36,17 @@ export default function SignInPage() {
 
       if (result?.ok) {
         router.push("/dashboard");
+        return;
+      }
+
+      if (result?.error?.startsWith("unverified")) {
+        const email = result.error.split(":")[1];
+        router.push(`/signUp/verify?email=${email}`);
+      } else if (result?.error?.startsWith("use")) {
+        setErrorMsg("Please use your Email Id until verified");
       } else {
         // This will now only catch actual password errors from NextAuth.
+        console.log(result?.error);
         setErrorMsg("Invalid username or password.");
       }
     } catch (err) {
@@ -69,7 +58,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4">
+    <div className="bg-beige flex min-h-screen flex-col items-center justify-center px-4 pt-23">
       {/* Card Box */}
       <div className="w-full max-w-md space-y-6 rounded-md bg-white p-8 shadow-md">
         {/* Heading */}
@@ -123,13 +112,13 @@ export default function SignInPage() {
           </div>
 
           {/* Sign In Button */}
-          <button
+          <PixelButton
             type="submit"
-            className="btn mt-2 w-full rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700"
+            className="hover:pointer w-full"
             disabled={loading}
           >
             {loading ? "Signing In..." : "Sign in"}
-          </button>
+          </PixelButton>
         </form>
         {/* Divider */}
         <div className="my-6 flex items-center">

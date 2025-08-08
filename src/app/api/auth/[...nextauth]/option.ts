@@ -5,8 +5,8 @@ import { env } from "@/lib/env";
 import prisma from "@/lib/prisma";
 import { NextAuthOptions, Session } from "next-auth";
 
-
 import { cookies } from "next/headers";
+import { error } from "console";
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -24,62 +24,56 @@ export const authOptions: NextAuthOptions = {
         rememberMe: { lable: "Remember Me", type: "checkbox" },
       },
       async authorize(credentials) {
-        try {
-          if (!credentials) {
-            return null;
-          }
-
-          //finding the user
-          const user = await prisma.user.findFirst({
-            where: {
-              OR: [
-                { name: credentials.username },
-                { email: credentials.username },
-              ],
-            },
-          });
-
-          //If user is not found
-          if (!user) {
-            console.log("No user found with the provided credentials");
-            return null;
-          }
-
-          if(!user.emailVerified){
-            
-            const isEmail = credentials.username.includes('@');
-            if(!isEmail){
-              throw new Error("Please use your email until you are verified");
-            }
-          throw new Error("Not Verified");
-          }
-          if (
-            !credentials?.username ||
-            !credentials?.password ||
-            !user.password
-          ) {
-            return null;
-          }
-
-          const isValid = await compare(credentials.password, user.password);
-          if (!isValid) {
-            console.log("Invalid password");
-            return null;
-          }
-          console.log("User authenticated successfully:");
-
-          return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            image:user.image,
-            rememberMe: credentials.rememberMe === "true",
-
-          }
-        } catch (error) {
-          console.error("Error during authorization:", error);
+        if (!credentials) {
           return null;
         }
+
+        //finding the user
+        const user = await prisma.user.findFirst({
+          where: {
+            OR: [
+              { name: credentials.username },
+              { email: credentials.username },
+            ],
+          },
+        });
+
+        //If user is not found
+        if (!user) {
+          console.log("No user found with the provided credentials");
+          return null;
+        }
+
+        if (!user.emailVerified) {
+          const isEmail = credentials.username.includes("@");
+          if (!isEmail) {
+            throw new Error("use email");
+          }
+          throw new Error(`unverified ${user.email}`);
+        }
+
+        if (
+          !credentials?.username ||
+          !credentials?.password ||
+          !user.password
+        ) {
+          return null;
+        }
+
+        const isValid = await compare(credentials.password, user.password);
+        if (!isValid) {
+          console.log("Invalid password");
+          return null;
+        }
+        console.log("User authenticated successfully:");
+
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          rememberMe: credentials.rememberMe === "true",
+        };
       },
     }),
   ],

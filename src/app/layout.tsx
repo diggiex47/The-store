@@ -6,8 +6,7 @@ import "./globals.css";
 import SessionProvider from "./SessionProvider";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "@/components/footer/page";
-
-
+import LayoutWrapper from "@/components/layoutWrapper/layoutwrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,15 +30,18 @@ export default function RootLayout({
 }>) {
   return (
     // Set a default theme here
-    <html lang="en" data-theme="light"> 
-      <body className=  {`${geistSans.variable} ${geistMono.variable} antialiased flex min-h-screen  flex-col`}>
-       <SessionProvider> 
-         
-        <Navbar />
-        <main className="flex-grow m-auto min-w-[300px] max-w-7xl p-4 pt-16">
-          {children}
-        </main>
-        <Footer/>
+    <html lang="en" data-theme="light">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
+      >
+        <SessionProvider>
+          {/* <header className="sticky top-0 z-50"> */}
+          {/* <Navbar /> */}
+          {/* </header> */}
+          <main className="flex flex-grow flex-col bg-[#f5f5dc]">
+            {children}
+          </main>
+          <Footer />
         </SessionProvider>
       </body>
     </html>
