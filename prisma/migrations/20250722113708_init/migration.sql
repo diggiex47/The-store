@@ -50,12 +50,9 @@ CREATE TABLE "Account" (
 
 -- CreateTable
 CREATE TABLE "Session" (
-    "id" TEXT NOT NULL,
     "sessionToken" TEXT NOT NULL,
     "userId" UUID NOT NULL,
-    "expires" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Session_pkey" PRIMARY KEY ("id")
+    "expires" TIMESTAMP(3) NOT NULL
 );
 
 -- CreateTable

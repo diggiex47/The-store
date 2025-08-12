@@ -21,7 +21,8 @@ export default function ProductCard({ product }: ProductCardProps) {
         <figure className="h-64 w-full overflow-hidden rounded-t-sm">
           {product.imageUrl ? (
             <Image
-              src={product.imageUrl}
+            src={product.imageUrl}
+              // src="https://images.unsplash.com/photo-1751378639381-e482ae167e39?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt={product.name}
               width={400}
               height={400}

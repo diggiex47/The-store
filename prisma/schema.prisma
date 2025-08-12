@@ -1,9 +1,6 @@
-// path: prisma/schema.prisma
-
 generator client {
   provider = "prisma-client-js"
-  output = "../src/generated/prisma"
- 
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -12,14 +9,15 @@ datasource db {
 }
 
 model Product {
-  id          String     @id @default(uuid()) @db.Uuid
+  id          String   @id @default(uuid()) @db.Uuid
   description String
   imageUrl    String
   name        String
   price       Float
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  cartItems   cartItem[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  cartItem cartItem[]
 }
 
 model Cart {
@@ -40,12 +38,10 @@ model cartItem {
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
-// Your NextAuth models are mostly correct.
-// The @db.Uuid attributes you added are perfect for consistency with your User id.
-
 model Account {
   id                String  @id @default(uuid())
   userId            String  @db.Uuid
+  type              String
   provider          String
   providerAccountId String
   refresh_token     String? @db.Text // <-- IMPROVEMENT: For very long tokens
@@ -56,18 +52,14 @@ model Account {
   id_token          String? @db.Text // <-- IMPROVEMENT: For very long tokens
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@unique([provider, providerAccountId])
 }
-
 model Session {
-  id           String   @id @default(uuid())
   sessionToken String   @unique
   userId       String   @db.Uuid
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
 model User {
   id            String    @id @default(uuid()) @db.Uuid
   name          String?
@@ -86,6 +78,5 @@ model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-
   @@unique([identifier, token])
 }
