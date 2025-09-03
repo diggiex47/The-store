@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///home/milo/Project/Design/The-store/src/app/loading.tsx"],"sourcesContent":["export default async function Loading() {\n    <span className=\"loading loading-spinner loading-lg m-auto block\"/>;\n}"],"names":[],"mappings":";;;;;AAAe,eAAe;kBAC1B,8OAAC;QAAK,WAAU;;;;;;AACpB","debugId":null}}]
+}

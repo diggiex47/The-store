@@ -1,0 +1,27 @@
+{
+  "node": {
+    "406978e7eac1c73712da718d70bd654ff47c60fb03": {
+      "workers": {
+        "app/Product/[id]/page": {
+          "moduleId": "[project]/.next-internal/server/app/Product/[id]/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/components/SearchProduct/page.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/app/Product/[id]/action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/Product/[id]/page": "rsc"
+      }
+    },
+    "40c0c940b552a32ad9ad82295410fa6356fd02f181": {
+      "workers": {
+        "app/Product/[id]/page": {
+          "moduleId": "[project]/.next-internal/server/app/Product/[id]/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/components/SearchProduct/page.tsx [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/app/Product/[id]/action.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/Product/[id]/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}

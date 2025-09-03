@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 23, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/middleware.ts"],"sourcesContent":["\nimport { NextResponse } from \"next/server\";\nimport type { NextRequest } from \"next/server\";\n\n// This function can be marked `async` if using `await` inside\nexport async function middleware(req: NextRequest) {\n  let cookies = req.cookies.get('token');\n  console.log(\"Middleware cookies:\", cookies);\n\n  if (!cookies) {\n    const loginURL = req.nextUrl.clone();\n    loginURL.pathname = '/login';\n\n\n    return NextResponse.redirect(loginURL);\n  }\n\n\n  return NextResponse.next();\n}\n\n// See \"Matching Paths\" below to learn more\nexport const config = {\n  matcher: [\"/((?!api/|_next/static|_next/image|favicon.ico|login|register).*)\"],\n};\n"],"names":[],"mappings":";;;;AACA;AAAA;;AAIO,eAAe,WAAW,GAAgB;IAC/C,IAAI,UAAU,IAAI,OAAO,CAAC,GAAG,CAAC;IAC9B,QAAQ,GAAG,CAAC,uBAAuB;IAEnC,IAAI,CAAC,SAAS;QACZ,MAAM,WAAW,IAAI,OAAO,CAAC,KAAK;QAClC,SAAS,QAAQ,GAAG;QAGpB,OAAO,6LAAA,CAAA,eAAY,CAAC,QAAQ,CAAC;IAC/B;IAGA,OAAO,6LAAA,CAAA,eAAY,CAAC,IAAI;AAC1B;AAGO,MAAM,SAAS;IACpB,SAAS;QAAC;KAAoE;AAChF"}}]
+}
