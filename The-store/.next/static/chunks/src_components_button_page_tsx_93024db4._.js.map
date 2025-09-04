@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///home/milo/Project/The-store/src/components/button/page.tsx"],"sourcesContent":["\"use client\";\n\nimport React, { ComponentProps } from \"react\";\nimport { useFormStatus, } from \"react-dom\";\n\nexport default function Button(\n  { children,\n    className,\n    ...props\n  }: \n  { children: React.ReactNode; className?: string } & ComponentProps<'button'>  ) \n  {\n  const { pending } = useFormStatus();\n    return (\n    <button \n    {...props}\n    className={`btn btn-outline btn-accent ${className}`}\n    type='submit'\n    disabled={pending || props.disabled}\n    >\n      {pending && <span className=\"loading loading-spinner loading-sm\"></span>}\n      {children}\n    </button>\n  );\n}\n"],"names":[],"mappings":";;;;AAGA;;;AAHA;;AAKe,SAAS,OACtB,EAAE,QAAQ,EACR,SAAS,EACT,GAAG,OAEuE;;IAE5E,MAAM,EAAE,OAAO,EAAE,GAAG,CAAA,GAAA,oKAAA,CAAA,gBAAa,AAAD;IAC9B,qBACA,6LAAC;QACA,GAAG,KAAK;QACT,WAAW,CAAC,2BAA2B,EAAE,WAAW;QACpD,MAAK;QACL,UAAU,WAAW,MAAM,QAAQ;;YAEhC,yBAAW,6LAAC;gBAAK,WAAU;;;;;;YAC3B;;;;;;;AAGP;GAnBwB;;QAOF,oKAAA,CAAA,gBAAa;;;KAPX","debugId":null}}]
-}

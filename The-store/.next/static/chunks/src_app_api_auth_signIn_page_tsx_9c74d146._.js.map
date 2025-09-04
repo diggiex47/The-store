@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///home/milo/Project/The-store/src/app/api/auth/signIn/page.tsx"],"sourcesContent":["\"use client\";\n\nimport { signIn } from \"next-auth/react\";\n\nexport default function signInPage() {\n  return (\n    <div>\n      <div>\n        \n        <button\n          onClick={() => signIn()}\n          className=\"w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded\"\n        ></button>\n      </div>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;AAEA;AAFA;;;AAIe,SAAS;IACtB,qBACE,6LAAC;kBACC,cAAA,6LAAC;sBAEC,cAAA,6LAAC;gBACC,SAAS,IAAM,CAAA,GAAA,iJAAA,CAAA,SAAM,AAAD;gBACpB,WAAU;;;;;;;;;;;;;;;;AAKpB","debugId":null}}]
-}

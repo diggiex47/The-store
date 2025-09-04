@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 116, "column": 0}, "map": {"version":3,"sources":["file:///home/milo/Project/Design/The-store/src/app/api/auth/token/route.ts"],"sourcesContent":["import { NextRequest, NextResponse } from \"next/server\";\nimport { getToken} from \"next-auth/jwt\";\n\n\n\nexport async function GET(req: NextRequest){\n\n\n    const token = await getToken({req, secret: process.env.NEXTAUTH_SECRET, raw:true });\n\n\n    if(token){\n        return NextResponse.json({ token }, {status: 200})\n    }\n    else{\n        return NextResponse.json({error: \"Unauthorized\" } , {status: 401});\n    }\n}\n"],"names":[],"mappings":";;;AAAA;AACA;;;AAIO,eAAe,IAAI,GAAgB;IAGtC,MAAM,QAAQ,MAAM,CAAA,GAAA,8IAAA,CAAA,WAAQ,AAAD,EAAE;QAAC;QAAK,QAAQ,QAAQ,GAAG,CAAC,eAAe;QAAE,KAAI;IAAK;IAGjF,IAAG,OAAM;QACL,OAAO,gIAAA,CAAA,eAAY,CAAC,IAAI,CAAC;YAAE;QAAM,GAAG;YAAC,QAAQ;QAAG;IACpD,OACI;QACA,OAAO,gIAAA,CAAA,eAAY,CAAC,IAAI,CAAC;YAAC,OAAO;QAAe,GAAI;YAAC,QAAQ;QAAG;IACpE;AACJ","debugId":null}}]
-}

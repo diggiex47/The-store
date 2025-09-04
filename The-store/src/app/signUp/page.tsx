@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { signup } from "@/lib/api";
@@ -9,6 +9,22 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { redirect, useRouter } from "next/navigation";
 import PixelButton from "@/components/pixelButton/page";
+
+
+// --- NOTE: This is good, but for best practice, move custom hooks to their own file later (e.g., /hooks/useDebounce.ts) ---
+function useDebounce(value, delay) {
+    const [debounceVal, setDebounceVal] = useState(value);
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebounceVal(value);
+        }, delay);
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [value, delay]);
+    // --- We are not using this hook yet, but we will for the username check. ---
+}
 
 
 export default  function SignUp() {

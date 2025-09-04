@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///home/milo/Project/The-store/src/app/page.tsx"],"sourcesContent":["\"use client\"\n\nimport React from 'react';\n\nexport default function home() {\n    return (\n        <div>\n            \n            <>\n                <h1 className=\"text-center font-bold text-5xl\">WELCOME TO THE STORE</h1>\n                {/* <Navbar className= \"w-full\" /> */}\n            </>\n        </div>\n    )\n}\n"],"names":[],"mappings":";;;;AAAA;;AAIe,SAAS;IACpB,qBACI,8OAAC;kBAEG,cAAA;sBACI,cAAA,8OAAC;gBAAG,WAAU;0BAAiC;;;;;;;;;;;;AAK/D","debugId":null}}]
-}
